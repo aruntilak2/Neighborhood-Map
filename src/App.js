@@ -2,14 +2,43 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
+import axios from 'axios';
+
 
 class App extends Component {
-  // initMap= () => {
-  //   const map = new google.maps.Map(document.getElementById('map'), {
-  //     center: {lat: -34.397, lng: 150.644},
-  //     zoom: 8
-  //   });
-  // }
+  
+  state = {
+    venues : []
+  }
+  componentDidMount() {
+    this.getvenues()
+  }
+  getvenues =() =>{
+    const endpoint = "https://api.foursquare.com/v2/venues/explore?";
+    const parameters = {
+      client_id: "X0J4YMUWF4LLQ1O2IW2OWTFXEPW4HRVG4S4BGDGRAMA1ZOZU",
+      client_secret : "I542O4WR20LOSGLEIUHHNM3FJU0T3J1SQUN4TY4T3A1TZBMJ",
+      query: "jewelry stores",
+      near: "Bellevue",
+      v:'20182507'
+    }
+    axios.get(endpoint + new URLSearchParams(parameters))
+      .then(response => {
+        // console.log(response.data.response.groups[0].items);
+        this.setState({
+          venues: response.data.response.groups[0].items
+        })
+        console.log(this.state.venues);
+      })
+      .catch(error => {
+        console.log('Error' + error);
+      })
+
+      // this.state.venues.Map(venue =>{
+      
+      // })
+
+  }
   render() {
     const style ={
       height: '100%',
@@ -22,24 +51,25 @@ class App extends Component {
           
           <Map 
             google={this.props.google} 
-            zoom={3}
+            zoom={13}
             style={style}
-            // initialCenter = {{
-            //   lat: 40.854885,
-            //   lng: -88.081807
-            // }}
+            initialCenter = {{
+              lat: 47.38093,
+              lng: -122.23484
+            }}
             >
               {/* onMarkerClick (props, marker){
               Marker.title ="Working?"
             } */}
+           
            
             <Marker 
               // onClick={this.onMarkerClick}
               name={'Current location'} 
               title= {'Test'}
               position= {{
-                lat: 37.778519,
-                lng: -122.405640
+                lat: 47.38093,
+                lng: -122.23484
               }}             
                
             />
