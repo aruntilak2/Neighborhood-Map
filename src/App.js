@@ -66,12 +66,44 @@ class App extends Component {
             <Marker 
               // onClick={this.onMarkerClick}
               name={'Current location'} 
-              title= {'Test'}
+              title= {"Tiffany & Co."}
               position= {{
-                lat: 47.38093,
-                lng: -122.23484
+                lat: 47.6165195,
+                lng: -122.2044366
               }}             
-               
+            />
+            <Marker 
+              // onClick={this.onMarkerClick}
+              name={'Current location'} 
+              title= {"Ben Bridge Jeweler"}
+              position= {{
+                lat: 47.61569136960391,
+                lng: -122.20395225712211
+              }}             
+            /><Marker 
+              // onClick={this.onMarkerClick}
+              name={'Current location'} 
+              title= {"The Bellevue Jeweler"}
+              position= {{
+                lat: 47.61445212411564,
+                lng: -122.20161437988281
+              }}             
+            /><Marker 
+              // onClick={this.onMarkerClick}
+              name={'Current location'} 
+              title= {"Nique Design Jewelers"}
+              position= {{
+                lat: 47.612116548161595,
+                lng: -122.20192996989636
+              }}             
+            /><Marker 
+              // onClick={this.onMarkerClick}
+              name={'Current location'} 
+              title= {"Gordon James Fine Diamonds"}
+              position= {{
+                lat: 47.61015585385117,
+                lng: -122.20452994108199
+              }}             
             />
             {/* <InfoWindow onClose={this.onInfoWindowClose}>
                 <div>
