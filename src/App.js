@@ -7,12 +7,14 @@ import SearchAppBar from './sidebar'
 
 class App extends Component { 
   state = {
-     venues : []
+    // Empty array to store dynamic data
+    venues : []
   } 
   componentDidMount() {
     this.getvenues()
     this.loadMaps()
   }
+  // This function uses to load Google Script
   loadMaps =() =>{
     loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCf3etmckSNxbM0d_htnZZGwKTpQP2TIQk&callback=initMap')
     window.initMap = this.initMap
@@ -27,9 +29,15 @@ class App extends Component {
       zoom : 15
     })
 
+    // This infowindow gets the content using "setContent" in the marker event listener
+  var infowindow = new window.google.maps.InfoWindow()
   this.state.venues.map(myvenue => {
 
+    // This stores the dynamic information 
+    var contentstring= myvenue.venue.location.address+', '+
+     myvenue.venue.location.city+ ' - USA'
 
+    //  Show markers using map method
     var marker = new window.google.maps.Marker({
       position: {
         lat: myvenue.venue.location.lat,
@@ -38,8 +46,15 @@ class App extends Component {
       map: map,
       title: myvenue.venue.name
     })
+
+    marker.addListener('click', function() {
+      infowindow.setContent(contentstring)
+      infowindow.open(map, marker);
+    });
   })
   }
+
+  // Using Foursquare to get Dynamic data
   getvenues =() =>{
     const endpoint = "https://api.foursquare.com/v2/venues/explore?";
     const parameters = {
@@ -49,6 +64,8 @@ class App extends Component {
       near: "Bellevue",
       v:'20182507'
     }
+
+    //  My first timeUsing axios instead of fetch.
     axios.get(endpoint + new URLSearchParams(parameters))
       .then(response => {
         // console.log(response.data.response.groups[0].items);
