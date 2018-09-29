@@ -9,17 +9,20 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import SimpleMenu from './Menu';
+import { Menu, MenuList, MenuItem } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
     width: '100%',
+    
   },
   grow: {
     flexGrow: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginLeft: -10,
+    marginRight: 100,
   },
   title: {
     display: 'none',
@@ -78,8 +81,17 @@ function SearchAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-            <MenuIcon />
+            {/* <MenuIcon> */}
+            {/* <SimpleMenu /> */}
+            {/* </MenuIcon> */}
+            <MenuList>
+              {/* <MenuIcon /> */}
+                <SimpleMenu />
+            </MenuList>
           </IconButton>
+           <Typography className={classes.title} variant="title" color="inherit" noWrap>
+            Neighborhood Map
+          </Typography>
           <div className={classes.grow} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>

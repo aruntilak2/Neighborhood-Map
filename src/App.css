@@ -38,3 +38,21 @@ html,body {
   font-family: sans-serif;
 }
  
+.container {
+  display: flex;
+}
+/* 
+.container div{
+ border: 1px #ccc solid;
+} */
+
+.sidemenu {
+  flex: 1;
+  align-content: inherit;
+}
+.mapplace {
+  flex:4;
+}
+.menulist {
+  display: flex;
+}

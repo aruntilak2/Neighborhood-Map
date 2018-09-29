@@ -4,6 +4,8 @@ import './App.css';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
 import axios from 'axios';
 import SearchAppBar from './sidebar'
+import { MenuList, MenuItem } from '@material-ui/core';
+import SimpleMenu from './Menu'
 
 class App extends Component { 
   state = {
@@ -78,12 +80,13 @@ class App extends Component {
         console.log('Error' + error);
       })
       this.state.venues.map(myvenue =>{    
+
         var marker = new window.google.Marker({
           position: {
             lat: myvenue.venue.location.lat , 
             lng: myvenue.venue.location.lng
           },
-          map: Map,
+        map: Map,
         title: myvenue.venue.title
         }) 
       })
@@ -92,10 +95,24 @@ class App extends Component {
     
     return (
         <div className="App">
-          <h1>Neighborhood Map</h1>  
-          <SearchAppBar />        
-          <div id="map">
-          </div>
+            <div className ='container'>
+              <div className ="sidemenu">
+              <MenuList className ="menulist">
+                  <MenuItem>
+                  {this.state.venues.map(myvenue =>{
+                   return <MenuItem>
+                     {myvenue.venue.name}
+                   </MenuItem>
+                   } )} 
+                  </MenuItem>
+                </MenuList>
+              </div>
+              <div className="mapplace">
+                <SearchAppBar />
+                  <div id="map">
+                  </div>
+              </div>
+            </div>
         </div>
     );
   }
