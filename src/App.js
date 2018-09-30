@@ -3,9 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
 import axios from 'axios';
-import SearchAppBar from './sidebar'
+// import SearchAppBar from './sidebar'
 import { MenuList, MenuItem } from '@material-ui/core';
-import SimpleMenu from './Menu'
+// import SimpleMenu from './Menu'
+import NavBar from './Navbar'
+import SideBar from './Sidebar2'
 
 class App extends Component { 
   state = {
@@ -74,13 +76,17 @@ class App extends Component {
         this.setState({
           venues: response.data.response.groups[0].items
         })
-        console.log(this.state.venues);
+        // export var venues;
+        // console.log(this.state.venues);
+        // console.log(this.state.venues.venue.name)
+
       })
       .catch(error => {
         console.log('Error' + error);
       })
-      this.state.venues.map(myvenue =>{    
-
+      this.state.venues.map(myvenue =>{   
+        console.log(myvenue.venue.name)
+ 
         var marker = new window.google.Marker({
           position: {
             lat: myvenue.venue.location.lat , 
@@ -89,26 +95,49 @@ class App extends Component {
         map: Map,
         title: myvenue.venue.title
         }) 
+        // return <SideBar name={this.state.myvenue.venue.name} />
+
       })
+
+
   }
   render() {
-    
+    // console.log(this.state.venues[2].venue.name)
+
     return (
         <div className="App">
+        <NavBar />
             <div className ='container'>
               <div className ="sidemenu">
-              <MenuList className ="menulist">
+              <SideBar 
+                ListOfVenues = {this.state.venues}
+              /> 
+
+              {/* working fine */}
+              {/* <MenuList className ="menulist">
                   <MenuItem>
                   {this.state.venues.map(myvenue =>{
-                   return <MenuItem>
-                     {myvenue.venue.name}
-                   </MenuItem>
+                   return <MenuItem key = {myvenue.venue.name}>
+                          {myvenue.venue.name}
+                        </MenuItem>
                    } )} 
                   </MenuItem>
-                </MenuList>
+                </MenuList> */}
+
+                {/* Test 1 */}
+                {/* <MenuList className ="menulist">
+                  <MenuItem>
+                  {this.state.venues.map(myvenue =>{
+                   return <MenuItem key = {myvenue.venue.name}>
+                          {myvenue.venue.name}
+                        </MenuItem>
+                   } )} 
+                  </MenuItem>
+                </MenuList> */}
+
+                {/* </SideBar> */}
               </div>
               <div className="mapplace">
-                <SearchAppBar />
                   <div id="map">
                   </div>
               </div>

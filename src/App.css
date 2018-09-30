@@ -38,7 +38,7 @@ html,body {
   font-family: sans-serif;
 }
  
-.container {
+.container, #navbargrid{
   display: flex;
 }
 /* 
@@ -46,13 +46,70 @@ html,body {
  border: 1px #ccc solid;
 } */
 
+
+.NavBar{
+  /* height: 30px; */
+  background: #00c3ff;
+  flex: 1;
+  align-content: inherit;
+  max-width: 100%;
+  border: 1px #ccc solid;
+
+
+}
 .sidemenu {
   flex: 1;
   align-content: inherit;
+  width:400px;
+  max-width: 100%;
 }
 .mapplace {
   flex:4;
 }
 .menulist {
   display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: row;
+  flex-wrap: inherit;
+}
+
+#searchfield{
+  max-width: 85%;
+  border: 3px #ccc solid;
+}
+
+
+.hamburger {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#hamicon{
+  flex: 5%;
+  padding: 15px;
+}
+
+#navtitle{
+ flex:85%;
+}
+
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
 }
