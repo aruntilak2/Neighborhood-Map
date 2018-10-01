@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
-import axios from 'axios';
 
+//  this.props.hamiconwork-- From Navbar.js
 
 
 class HamBurger extends Component{
@@ -11,10 +9,10 @@ class HamBurger extends Component{
     // state ={
     //      ham = {props}
     // }
-     ClickBurger= (x)=> {
-        x.classList.toggle("change");
-    }
 
+    //  ClickBurger= ()=> {
+    //     x.classList.toggle("change");
+    // }
 
 
     // ham.addListener('click', function() {
@@ -25,7 +23,7 @@ class HamBurger extends Component{
         return(
            <div >
                 <div className="hamburger" 
-                    // onClick="ClickBurger(this)"
+                    onClick={this.props.hamiconwork}
                 >
                     <div className="bar1"></div>
                     <div className="bar2"></div>

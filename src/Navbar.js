@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
-import axios from 'axios';
 import HamBurger from './hamburger'
 
-
 class NavBar extends Component{
+
+// state ={
+//     status: true
+
+// }
+    
+    hamOpenClose= (x)=> {
+
+        // x.classList.toggle("change");
+        // this.setState = false
+
+    }
     render(){
         return(
            <div className= "NavBar">
            <div id = "navbargrid">
                 <div id ="hamicon">
-                    <HamBurger />
+                    <HamBurger 
+                        hamiconwork ={this.props.hamOpenClose}
+
+                    />
                 </div>
                 <div id ="navtitle">
                     <h1> Neighborhood Map</h1>

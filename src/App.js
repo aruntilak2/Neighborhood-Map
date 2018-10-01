@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
 import axios from 'axios';
 // import SearchAppBar from './sidebar'
-import { MenuList, MenuItem } from '@material-ui/core';
+// import { MenuList, MenuItem } from '@material-ui/core';
 // import SimpleMenu from './Menu'
 import NavBar from './Navbar'
 import SideBar from './Sidebar2'
@@ -41,7 +41,7 @@ class App extends Component {
     var contentstring= myvenue.venue.location.address+', '+
      myvenue.venue.location.city+ ' - USA'
 
-    //  Show markers using map method
+    //  Show markers using map method uding Marker 
     var marker = new window.google.maps.Marker({
       position: {
         lat: myvenue.venue.location.lat,
@@ -89,28 +89,41 @@ class App extends Component {
  
         var marker = new window.google.Marker({
           position: {
-            lat: myvenue.venue.location.lat , 
-            lng: myvenue.venue.location.lng
+                    lat: myvenue.venue.location.lat , 
+                    lng: myvenue.venue.location.lng
           },
         map: Map,
         title: myvenue.venue.title
         }) 
-        // return <SideBar name={this.state.myvenue.venue.name} />
-
       })
 
 
   }
+
+// SEarch Query Testing
+  // filtervenues=(query) => {
+  //   let f =query ? this.venues.filter (v => v.name.includes(query)) : this.venues;
+    
+  // }
+
+  
+
+  // Search Query
+
+
   render() {
     // console.log(this.state.venues[2].venue.name)
 
     return (
         <div className="App">
-        <NavBar />
+        <NavBar 
+
+        />
             <div className ='container'>
               <div className ="sidemenu">
               <SideBar 
                 ListOfVenues = {this.state.venues}
+                MarkersProp ={this.state.venues}
               /> 
 
               {/* working fine */}

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  text-decoration-color: #f5f1f1;
 }
 
 .App-logo {
@@ -27,7 +28,6 @@
   to { transform: rotate(360deg); }
 }
 
-
 #map {
   height: 100vh;
 } 
@@ -49,7 +49,7 @@ html,body {
 
 .NavBar{
   /* height: 30px; */
-  background: #00c3ff;
+  background: #02B7E9;
   flex: 1;
   align-content: inherit;
   max-width: 100%;
@@ -62,6 +62,10 @@ html,body {
   align-content: inherit;
   width:400px;
   max-width: 100%;
+  height: 100hv;
+  border: 1px #ccc solid;
+  background: #02B7E9;
+
 }
 .mapplace {
   flex:4;
@@ -93,6 +97,28 @@ html,body {
  flex:85%;
 }
 
+.navlistnames{
+  height: 80vh;
+  width:100%;
+/*   
+  overflow: auto;
+  padding: 2px; */
+  overflow-y: scroll;
+  /* scrollbar-width: thin; */
+
+}
+::-webkit-scrollbar {
+  width: 20px;
+  /* scrollbar-width: 1em; */
+
+}
+
+.navlistnamebox{
+  height: 120%;
+  width:100%;
+  overflow: auto;
+
+}
 
 .bar1, .bar2, .bar3 {
   width: 35px;
