@@ -12,6 +12,7 @@ class SideBar extends React.Component{
         var venuearray = this.props.ListOfVenues;
         // console.log("venuarray :"+venuearray);
         venuearray.map (venuename => {
+            let index = venuearray[venuename];
             {/* console.log(venuename.venue.name); */}
             let name = venuename.venue.name;
             // console.log(name);
@@ -46,7 +47,7 @@ class SideBar extends React.Component{
                                     let name = venuename.venue.name;
                                     {/* console.log(name); */}
                                     return(
-                                        <li key= {name}>
+                                        <li key= {index}>
                                             <h5><a href="/">{name}</a>
                                             </h5>
                                         </li>

@@ -12,11 +12,16 @@ import SideBar from './Sidebar2'
 class App extends Component { 
   state = {
     // Empty array to store dynamic data
-    venues : []
+    venues : [],
+    markers : []
   } 
   componentDidMount() {
     this.getvenues()
-    this.loadMaps()
+
+    // using this loadmaps as callback function in line 89.
+    // Callback helps to render maps, save venues in array 
+    // and then render maps 
+    // this.loadMaps()
   }
   // This function uses to load Google Script
   loadMaps =() =>{
@@ -34,28 +39,40 @@ class App extends Component {
     })
 
     // This infowindow gets the content using "setContent" in the marker event listener
-  var infowindow = new window.google.maps.InfoWindow()
-  this.state.venues.map(myvenue => {
-
-    // This stores the dynamic information 
-    var contentstring= myvenue.venue.location.address+', '+
-     myvenue.venue.location.city+ ' - USA'
-
-    //  Show markers using map method uding Marker 
-    var marker = new window.google.maps.Marker({
-      position: {
-        lat: myvenue.venue.location.lat,
-        lng: myvenue.venue.location.lng
-      },
-      map: map,
-      title: myvenue.venue.name
-    })
-
-    marker.addListener('click', function() {
-      infowindow.setContent(contentstring)
-      infowindow.open(map, marker);
+    var infowindow = new window.google.maps.InfoWindow({
+      //  myvenue.venue.location.address+', '+
+    // myvenue.venue.location.city+ ' - USA'
     });
-  })
+    
+    this.state.venues.forEach(myvenue => {
+      // This stores the dynamic information 
+      var infobox= myvenue.venue.location.address+', '+
+      myvenue.venue.location.city+ ' - USA';
+      console.log(infobox);
+    
+      //  Show markers using map method uding Marker 
+      var marker = new window.google.maps.Marker({
+        position: {
+          lat: myvenue.venue.location.lat,
+          lng: myvenue.venue.location.lng
+        },
+        map: map,
+        title: myvenue.venue.name,
+        name: myvenue.venue.name,
+        animation: window.google.maps.Animation.DROP
+        // contentstring: contentstring
+      })
+      this.state.markers.push(marker);
+      // console.log(markers);
+
+
+      marker.addListener('click', function() {
+        infowindow.setContent(infobox);
+        infowindow.open(map, marker);
+        // infowindow.setCenter;
+      });
+
+    })
   }
 
   // Using Foursquare to get Dynamic data
@@ -75,7 +92,7 @@ class App extends Component {
         // console.log(response.data.response.groups[0].items);
         this.setState({
           venues: response.data.response.groups[0].items
-        })
+        }, this.loadMaps())
         // export var venues;
         // console.log(this.state.venues);
         // console.log(this.state.venues.venue.name)
@@ -95,8 +112,16 @@ class App extends Component {
         map: Map,
         title: myvenue.venue.title
         }) 
-      })
 
+        // Pushing markers test
+        // this.setState({
+        //   markers: response.data.response.groups[0].items
+        // })
+        // console.log(markers);
+
+        // TEst end?
+
+      })
 
   }
 
@@ -105,11 +130,8 @@ class App extends Component {
   //   let f =query ? this.venues.filter (v => v.name.includes(query)) : this.venues;
     
   // }
-
   
-
   // Search Query
-
 
   render() {
     // console.log(this.state.venues[2].venue.name)
@@ -117,7 +139,6 @@ class App extends Component {
     return (
         <div className="App">
         <NavBar 
-
         />
             <div className ='container'>
               <div className ="sidemenu">
