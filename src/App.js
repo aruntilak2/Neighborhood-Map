@@ -101,7 +101,7 @@ class App extends Component {
       .catch(error => {
         console.log('Error' + error);
       })
-      this.state.venues.map(myvenue =>{   
+      this.state.venues.forEach(myvenue =>{   
         console.log(myvenue.venue.name)
  
         var marker = new window.google.Marker({

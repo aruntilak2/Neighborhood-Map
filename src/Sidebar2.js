@@ -11,7 +11,9 @@ class SideBar extends React.Component{
         // for local use
         var venuearray = this.props.ListOfVenues;
         // console.log("venuarray :"+venuearray);
-        venuearray.map (venuename => {
+        venuearray.forEach(element => {
+            
+        }); (venuename => {
             index.push(venuename)
             {/* console.log(venuename.venue.name); */}
             let name = venuename.venue.name;
