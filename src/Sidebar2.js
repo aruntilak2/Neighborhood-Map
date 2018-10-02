@@ -5,14 +5,14 @@ import './App.css';
 
 // Remember -----this.props.ListOfVenues = Venuesarray from App.js
 // this.props.MarkersProp =for All markers form Appjs using getvenues method
-
+ var index= []
 class SideBar extends React.Component{
     render(){
         // for local use
         var venuearray = this.props.ListOfVenues;
         // console.log("venuarray :"+venuearray);
         venuearray.map (venuename => {
-            let index = venuearray[venuename];
+            index.push(venuename)
             {/* console.log(venuename.venue.name); */}
             let name = venuename.venue.name;
             // console.log(name);
