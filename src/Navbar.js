@@ -13,6 +13,8 @@ class NavBar extends Component{
 
         // x.classList.toggle("change");
         // this.setState = false
+        // x.classList.toggle("change");
+        // this.setState = false
 
     }
     render(){

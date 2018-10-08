@@ -60,7 +60,7 @@ html,body {
 .sidemenu {
   flex: 1;
   align-content: inherit;
-  width:400px;
+  width:25%;
   max-width: 100%;
   height: 100hv;
   border: 1px #ccc solid;

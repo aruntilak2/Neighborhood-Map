@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
 import axios from 'axios';
-// import SearchAppBar from './sidebar'
-// import { MenuList, MenuItem } from '@material-ui/core';
-// import SimpleMenu from './Menu'
+
 import NavBar from './Navbar'
 import SideBar from './Sidebar2'
 
@@ -13,7 +10,7 @@ class App extends Component {
   state = {
     // Empty array to store dynamic data
     venues : [],
-    markers : []
+    allMarkers : []
   } 
   componentDidMount() {
     this.getvenues()
@@ -48,7 +45,7 @@ class App extends Component {
       // This stores the dynamic information 
       var infobox= myvenue.venue.location.address+', '+
       myvenue.venue.location.city+ ' - USA';
-      console.log(infobox);
+      // console.log(infobox);
     
       //  Show markers using map method uding Marker 
       var marker = new window.google.maps.Marker({
@@ -62,9 +59,8 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP
         // contentstring: contentstring
       })
-      this.state.markers.push(marker);
+      this.state.allMarkers.push(marker);
       // console.log(markers);
-
 
       marker.addListener('click', function() {
         infowindow.setContent(infobox);
@@ -73,6 +69,10 @@ class App extends Component {
       });
 
     })
+    // this.setState({
+    //   markers: this.state.allMarkers
+    // });
+    console.log(this.state.markers)
   }
 
   // Using Foursquare to get Dynamic data
@@ -92,6 +92,7 @@ class App extends Component {
         // console.log(response.data.response.groups[0].items);
         this.setState({
           venues: response.data.response.groups[0].items
+
         }, this.loadMaps())
         // export var venues;
         // console.log(this.state.venues);
@@ -122,9 +123,7 @@ class App extends Component {
         // TEst end?
 
       })
-
   }
-
 // SEarch Query Testing
   // filtervenues=(query) => {
   //   let f =query ? this.venues.filter (v => v.name.includes(query)) : this.venues;
@@ -144,7 +143,8 @@ class App extends Component {
               <div className ="sidemenu">
               <SideBar 
                 ListOfVenues = {this.state.venues}
-                MarkersProp ={this.state.venues}
+                MarkersProp ={this.state.allMarkers}
+                
               /> 
 
               {/* working fine */}
