@@ -69,9 +69,9 @@ class App extends Component {
       });
 
     })
-    // this.setState({
-    //   markers: this.state.allMarkers
-    // });
+    this.setState({
+      markers: this.state.allMarkers
+    });
     console.log(this.state.markers)
   }
 
@@ -92,7 +92,6 @@ class App extends Component {
         // console.log(response.data.response.groups[0].items);
         this.setState({
           venues: response.data.response.groups[0].items
-
         }, this.loadMaps())
         // export var venues;
         // console.log(this.state.venues);
@@ -123,7 +122,9 @@ class App extends Component {
         // TEst end?
 
       })
+
   }
+
 // SEarch Query Testing
   // filtervenues=(query) => {
   //   let f =query ? this.venues.filter (v => v.name.includes(query)) : this.venues;
@@ -144,7 +145,6 @@ class App extends Component {
               <SideBar 
                 ListOfVenues = {this.state.venues}
                 MarkersProp ={this.state.allMarkers}
-                
               /> 
 
               {/* working fine */}

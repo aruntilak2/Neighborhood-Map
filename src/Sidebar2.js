@@ -6,28 +6,6 @@ import './App.css';
 // Remember -----this.props.ListOfVenues = Venuesarray from App.js
 //               this.props.MarkersProp = for All markers form Appjs using getvenues method
 class SideBar extends React.Component{
-    state = {
-        query : " ",
-        // bringing all the venues with props from App.js
-        getStoreArray : this.props.ListOfVenues,
-        // bringing all the markers with props from App.js
-        getMarkerArray: this.props.MarkersProp
-    }
-
-    updateQuery = (query) => {
-        this.setState({
-            // query :query.trim()
-            query :query
-
-        })
-    }
-
-    // Saving them in state with function
-    getStoreWithMarker = () =>{
-        this.setState({getStoreArray : this.state.getStoreArray})
-        this.setState({getMarkerArray: this.state.getMarkerArray})
-
-    }
     render(){
         // for local use
         var venuearray = this.props.ListOfVenues;
@@ -41,6 +19,7 @@ class SideBar extends React.Component{
             let name = venuename.venue.name;
             // console.log(name);
             {name}
+
             // venuename.addListener('click', function() {
             //     markersarray[venuename]
             // });
@@ -75,12 +54,9 @@ class SideBar extends React.Component{
                 <div>
                
                     <h3> Search here...</h3>
-                    <input id = "searchfield"
-                           type="text" 
+                    <input id = "searchfield" type="text" 
                            name="fname" 
                            placeholder= "Search for a place..."
-                           value = {this.state.query}
-                           onChange = {(event)=> this.updateQuery(event.target.value)}
                     >
                     </input>
                     <div className ="navlistnames">
@@ -91,11 +67,7 @@ class SideBar extends React.Component{
                                     let name = venuename.venue.name;
                                     {/* console.log(name); */}
                                     return(
-                                        <li key= {index}
-                                            // {
-                                            //     this.state.getStoreArray.map() =>                                                 
-                                            // }
-                                        >
+                                        <li key= {index}>
                                             <h5><a href="/">{name}</a>
                                             </h5>
                                         </li>
