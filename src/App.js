@@ -11,7 +11,9 @@ class App extends Component {
     allMarkers : [],
     allMarkersTitles : [],
     infobox: null,
-    map : null
+    map : null,
+    query: '',
+    searchVenues: ''
   } 
   componentDidMount() {
     this.getvenues()
@@ -105,6 +107,22 @@ class App extends Component {
       near: "Bellevue",
       v:'20182507'
     }
+    filterVenues = (event) => {
+      const {value} = event.target;
+      let searchVenues = [];
+      this.state.venues.forEach(venue =>{
+        if(venue.venue.name.toLowercase().indexOf(value.toLowercase()) >= 0){
+          venue.marker.setVisible(true);
+          searchVenues.push(event);
+        } else {
+          venue.marker.setVisible(false);
+        }
+      })
+      this.setState ({
+        searchVenues: searchVenues,
+        query : value
+      })
+    }
 
     //  My first timeUsing axios instead of fetch.
     axios.get(endpoint + new URLSearchParams(parameters))
@@ -139,6 +157,8 @@ class App extends Component {
                 markersProp ={this.state.allMarkers}
                 markerTitles = {this.state.allMarkersTitles}
                 handlelistitems = {this.handlelistitems.bind(this)}
+                filterVenues = {this.filterVenues}
+                query = {this.state.query}
               /> 
               </div>
               <div className="mapplace">

@@ -8,7 +8,7 @@ class SideBar extends React.Component{
 
     render(){
        
-        const {handlelistitems, listOfVenues} = this.props;
+        const {handlelistitems, listOfVenues, query, filterVenues} = this.props;
 
         return(
            <div>
@@ -18,6 +18,10 @@ class SideBar extends React.Component{
                     <input id = "searchfield" type="text" 
                            name="fname" 
                            placeholder= "Search for a place..."
+                           value = {query} 
+                           onChange = {e => {
+                               filterVenues(e);
+                           }}
                     >
                     </input>
                     <div className ="navlistnames">
