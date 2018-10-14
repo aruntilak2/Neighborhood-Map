@@ -96,6 +96,23 @@ class App extends Component {
       }
     });
   }
+  filterVenues = (event) => {
+    const {value} = event.target;
+    let searchVenues = [];
+    this.state.venues.forEach(venue =>{
+      if(venue.venue.name.toLowercase().indexOf(value.toLowercase()) >= 0){
+        venue.marker.setVisible(true);
+        searchVenues.push(venue);
+      } else {
+        venue.marker.setVisible(false);
+      }
+    })
+    this.setState ({
+      searchVenues: searchVenues,
+      query : value
+    })
+  }
+
 
   // Using Foursquare to get Dynamic data
   getvenues =() =>{
@@ -107,23 +124,6 @@ class App extends Component {
       near: "Bellevue",
       v:'20182507'
     }
-    filterVenues = (event) => {
-      const {value} = event.target;
-      let searchVenues = [];
-      this.state.venues.forEach(venue =>{
-        if(venue.venue.name.toLowercase().indexOf(value.toLowercase()) >= 0){
-          venue.marker.setVisible(true);
-          searchVenues.push(event);
-        } else {
-          venue.marker.setVisible(false);
-        }
-      })
-      this.setState ({
-        searchVenues: searchVenues,
-        query : value
-      })
-    }
-
     //  My first timeUsing axios instead of fetch.
     axios.get(endpoint + new URLSearchParams(parameters))
       .then(response => {

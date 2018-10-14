@@ -4,6 +4,7 @@ import './App.css';
 //               this.props.MarkersProp = for All markers form Appjs using getvenues method
 //               this.props.MarkerTitles = for all marker Titles
 //               this.props.HandleListItems = function from App.js
+
 class SideBar extends React.Component{
 
     render(){
