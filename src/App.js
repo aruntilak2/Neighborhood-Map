@@ -10,7 +10,9 @@ class App extends Component {
   state = {
     // Empty array to store dynamic data
     venues : [],
-    allMarkers : []
+    allMarkers : [],
+    allMarkersTitles : [],
+    infobox: null
   } 
   componentDidMount() {
     this.getvenues()
@@ -34,12 +36,9 @@ class App extends Component {
       },
       zoom : 15
     })
-
+    var bounds = new window.google.maps.LatLngBounds();
     // This infowindow gets the content using "setContent" in the marker event listener
-    var infowindow = new window.google.maps.InfoWindow({
-      //  myvenue.venue.location.address+', '+
-    // myvenue.venue.location.city+ ' - USA'
-    });
+    var infowindow = new window.google.maps.InfoWindow({ });
     
     this.state.venues.forEach(myvenue => {
       // This stores the dynamic information 
@@ -60,6 +59,7 @@ class App extends Component {
         // contentstring: contentstring
       })
       this.state.allMarkers.push(marker);
+      this.state.allMarkersTitles.push(marker.title);
       // console.log(markers);
 
       marker.addListener('click', function() {
@@ -67,12 +67,16 @@ class App extends Component {
         infowindow.open(map, marker);
         // infowindow.setCenter;
       });
-
     })
     this.setState({
-      markers: this.state.allMarkers
+      markers: this.state.allMarkers,
+      allMarkersTitles : this.state.allMarkersTitles
     });
-    console.log(this.state.markers)
+    // console.log(this.state.markers)
+    // console.log(this.state.allMarkersTitles)
+  }
+  handlelistitems = venue =>{
+    console.log(venue);
   }
 
   // Using Foursquare to get Dynamic data
@@ -96,7 +100,6 @@ class App extends Component {
         // export var venues;
         // console.log(this.state.venues);
         // console.log(this.state.venues.venue.name)
-
       })
       .catch(error => {
         console.log('Error' + error);
@@ -112,26 +115,8 @@ class App extends Component {
         map: Map,
         title: myvenue.venue.title
         }) 
-
-        // Pushing markers test
-        // this.setState({
-        //   markers: response.data.response.groups[0].items
-        // })
-        // console.log(markers);
-
-        // TEst end?
-
       })
-
   }
-
-// SEarch Query Testing
-  // filtervenues=(query) => {
-  //   let f =query ? this.venues.filter (v => v.name.includes(query)) : this.venues;
-    
-  // }
-  
-  // Search Query
 
   render() {
     // console.log(this.state.venues[2].venue.name)
@@ -145,8 +130,9 @@ class App extends Component {
               <SideBar 
                 ListOfVenues = {this.state.venues}
                 MarkersProp ={this.state.allMarkers}
+                MarkerTitles = {this.state.allMarkersTitles}
+                HandleListItmes = {this.handlelistitems}
               /> 
-
               {/* working fine */}
               {/* <MenuList className ="menulist">
                   <MenuItem>
@@ -157,7 +143,6 @@ class App extends Component {
                    } )} 
                   </MenuItem>
                 </MenuList> */}
-
                 {/* Test 1 */}
                 {/* <MenuList className ="menulist">
                   <MenuItem>
