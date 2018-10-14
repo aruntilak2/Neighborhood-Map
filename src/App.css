@@ -65,7 +65,9 @@ html,body {
   height: 100hv;
   border: 1px #ccc solid;
   background: #02B7E9;
-
+}
+.listitem {
+  cursor: pointer;
 }
 .mapplace {
   flex:4;
@@ -138,4 +140,10 @@ html,body {
 .change .bar3 {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
+}
+.gm-style-iw {
+  font-size: 15px;
+  width: 100px;
+  height: 100px;
+  color: black;
 }

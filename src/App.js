@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
 import axios from 'axios';
-
 import NavBar from './Navbar'
 import SideBar from './Sidebar2'
 
@@ -12,11 +10,11 @@ class App extends Component {
     venues : [],
     allMarkers : [],
     allMarkersTitles : [],
-    infobox: null
+    infobox: null,
+    map : null
   } 
   componentDidMount() {
     this.getvenues()
-
     // using this loadmaps as callback function in line 89.
     // Callback helps to render maps, save venues in array 
     // and then render maps 
@@ -39,12 +37,17 @@ class App extends Component {
     var bounds = new window.google.maps.LatLngBounds();
     // This infowindow gets the content using "setContent" in the marker event listener
     var infowindow = new window.google.maps.InfoWindow({ });
+    this.setState({
+      map:map,
+      infobox: infowindow
+    })
     
     this.state.venues.forEach(myvenue => {
       // This stores the dynamic information 
-      var infobox= myvenue.venue.location.address+', '+
-      myvenue.venue.location.city+ ' - USA';
-      // console.log(infobox);
+      var infobox=
+      `<h3>${myvenue.venue.name}</h3>
+       <p>${myvenue.venue.location.address+', '+
+       myvenue.venue.location.city+ ' - USA'}</p>`
     
       //  Show markers using map method uding Marker 
       var marker = new window.google.maps.Marker({
@@ -63,6 +66,7 @@ class App extends Component {
       // console.log(markers);
 
       marker.addListener('click', function() {
+        marker.title;
         infowindow.setContent(infobox);
         infowindow.open(map, marker);
         // infowindow.setCenter;
@@ -72,11 +76,23 @@ class App extends Component {
       markers: this.state.allMarkers,
       allMarkersTitles : this.state.allMarkersTitles
     });
-    // console.log(this.state.markers)
-    // console.log(this.state.allMarkersTitles)
   }
-  handlelistitems = venue =>{
-    console.log(venue);
+  handlelistitems = (e,name, venue) =>{
+    e.preventDefault();
+    console.log(e,name);
+    this.analyzeListItemToMarkers(name, venue);
+  }
+  analyzeListItemToMarkers = (name, venue) => {
+    console.log(this.state.venues);
+    console.log(this.state);
+    this.state.allMarkers.forEach(marker => {
+      if (name === marker.name) {
+        const infoBox = this.state.infobox;
+        infoBox.setContent(`<h3>${venue.venue.name}</h3>
+                            <p>${venue.venue.location.formattedAddress}</p>`);
+        infoBox.open(this.state.map, marker);
+      }
+    });
   }
 
   // Using Foursquare to get Dynamic data
@@ -98,7 +114,7 @@ class App extends Component {
           venues: response.data.response.groups[0].items
         }, this.loadMaps())
         // export var venues;
-        // console.log(this.state.venues);
+        console.log(this.state.venues);
         // console.log(this.state.venues.venue.name)
       })
       .catch(error => {
@@ -106,15 +122,6 @@ class App extends Component {
       })
       this.state.venues.forEach(myvenue =>{   
         console.log(myvenue.venue.name)
- 
-        var marker = new window.google.Marker({
-          position: {
-                    lat: myvenue.venue.location.lat , 
-                    lng: myvenue.venue.location.lng
-          },
-        map: Map,
-        title: myvenue.venue.title
-        }) 
       })
   }
 
@@ -128,33 +135,11 @@ class App extends Component {
             <div className ='container'>
               <div className ="sidemenu">
               <SideBar 
-                ListOfVenues = {this.state.venues}
-                MarkersProp ={this.state.allMarkers}
-                MarkerTitles = {this.state.allMarkersTitles}
-                HandleListItmes = {this.handlelistitems}
+                listOfVenues = {this.state.venues}
+                markersProp ={this.state.allMarkers}
+                markerTitles = {this.state.allMarkersTitles}
+                handlelistitems = {this.handlelistitems.bind(this)}
               /> 
-              {/* working fine */}
-              {/* <MenuList className ="menulist">
-                  <MenuItem>
-                  {this.state.venues.map(myvenue =>{
-                   return <MenuItem key = {myvenue.venue.name}>
-                          {myvenue.venue.name}
-                        </MenuItem>
-                   } )} 
-                  </MenuItem>
-                </MenuList> */}
-                {/* Test 1 */}
-                {/* <MenuList className ="menulist">
-                  <MenuItem>
-                  {this.state.venues.map(myvenue =>{
-                   return <MenuItem key = {myvenue.venue.name}>
-                          {myvenue.venue.name}
-                        </MenuItem>
-                   } )} 
-                  </MenuItem>
-                </MenuList> */}
-
-                {/* </SideBar> */}
               </div>
               <div className="mapplace">
                   <div id="map">

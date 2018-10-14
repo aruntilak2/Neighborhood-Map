@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-// import HamBurger from './hamburger'
 // Remember -----this.props.ListOfVenues = Venuesarray from App.js
 //               this.props.MarkersProp = for All markers form Appjs using getvenues method
 //               this.props.MarkerTitles = for all marker Titles
@@ -8,28 +7,8 @@ import './App.css';
 class SideBar extends React.Component{
 
     render(){
-        // for local use
-        var venuearray = this.props.ListOfVenues;
-        var index= []
-        var markersarray = this.props.MarkersProp;
-        var markertitlesarray = this.props.MarkerTitles;
-        // console.log("venuarray :"+venuearray);
-        // console.log("markersarray :"+ markersarray[0].title);
-        // console.log(markertitlesarray);
-
-
-        venuearray.forEach(venuename => {
-            // index.push(venuename);
-            {/* console.log(venuename.venue.name); */}
-            let name = venuename.venue.name;
-            // markertitlesarray.push(name);
-            // console.log(name);
-            // {name}
-            // venuename.addListener('click', function() {
-            //     markersarray[venuename]
-            // });
-        })
-        // console.log(markertitlesarray);
+       
+        const {handlelistitems, listOfVenues} = this.props;
 
         return(
            <div>
@@ -44,14 +23,17 @@ class SideBar extends React.Component{
                     <div className ="navlistnames">
                         <ol>
                             {
-                                venuearray.map ((venuename, index) => {
+                                listOfVenues.map ((venue, index) => {
                                     {/* console.log(venuename.venue.name); */}
-                                    let name = venuename.venue.name;
+                                    let name = venue.venue.name;
                                     {/* console.log(name); */}
                                     return(
-                                        <li key= {index} onClick = {this.props.HandleListItems}>
-                                            <h5><a href="/">{name}</a>
-                                            </h5>
+                                        <li className="listitem" key= {index} 
+                                        onClick = {(e) => {
+                                            handlelistitems(e,name,venue);
+                                        }}>
+                                            <h4>{name}
+                                            </h4>
 
                                         </li>
                                     )
