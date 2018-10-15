@@ -6,6 +6,10 @@ import './App.css';
 //               this.props.HandleListItems = function from App.js
 
 class SideBar extends React.Component{
+    // handleChange = (e)=>{
+    //     const evalue = e.target.value;
+    //     this.props.filterVenues(evalue);
+    // }
 
     render(){
        
@@ -19,10 +23,13 @@ class SideBar extends React.Component{
                     <input id = "searchfield" type="text" 
                            name="fname" 
                            placeholder= "Search for a place..."
-                           value = {query} 
                            onChange = {e => {
                                filterVenues(e);
+                            // this.handleChange(e).bind(this)
                            }}
+                            // onChange = {this.handleChange.bind(this)}
+                           value = {query} 
+
                     >
                     </input>
                     <div className ="navlistnames">

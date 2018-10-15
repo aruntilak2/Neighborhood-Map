@@ -100,11 +100,19 @@ class App extends Component {
     const {value} = event.target;
     let searchVenues = [];
     this.state.venues.forEach(venue =>{
-      if(venue.venue.name.toLowercase().indexOf(value.toLowercase()) >= 0){
-        venue.marker.setVisible(true);
-        searchVenues.push(venue);
+      // console.log(venue.venue.name);
+      // console.log(value);
+      // if(value.length >0){
+      //   console.log("More than one")
+      // }
+      if(venue.venue.name.toLowerCase().indexOf(value.toLowerCase()) >= 0){
+        console.log(value);
+        // venue.marker.setVisible(true);
+        // searchVenues.push(venue);
       } else {
-        venue.marker.setVisible(false);
+        // venue.marker.setVisible(false);
+        console.log("No query");
+        // this.setState({venues: venues})
       }
     })
     this.setState ({
@@ -157,7 +165,7 @@ class App extends Component {
                 markersProp ={this.state.allMarkers}
                 markerTitles = {this.state.allMarkersTitles}
                 handlelistitems = {this.handlelistitems.bind(this)}
-                filterVenues = {this.filterVenues}
+                filterVenues = {this.filterVenues.bind(this)}
                 query = {this.state.query}
               /> 
               </div>
