@@ -10,43 +10,66 @@ class SideBar extends React.Component{
     //     const evalue = e.target.value;
     //     this.props.filterVenues(evalue);
     // }
-
+    state = {
+        query: '',
+        searchVenues : []
+    }
+    componentWillReceiveProps(data){
+        this.setState({
+            searchVenues: data.markersProp
+        });
+        console.log(this.state);
+    }
+    filterVenues = (event) => {
+        const {value} = event.target;
+        const search = [];
+        console.log(this.props.markersProp);
+        this.props.markersProp.forEach(venue => {
+            if(venue.name.toLowerCase().indexOf(value.toLowerCase()) >= 0){
+                // console.log(value);
+                venue.setVisible(true);
+                search.push(venue);
+              } else {
+                venue.setVisible(false);
+              }
+            })
+            this.setState ({
+              searchVenues: search,
+              query : value
+            })
+        }          
     render(){
-       
-        const {handlelistitems, listOfVenues, query, filterVenues} = this.props;
-
+        console.log(this.state.seachVenues);
+        // const {handlelistitems, listOfVenues, query, filterVenues} = this.props;
         return(
            <div>
-                <div>
-               
+                <div>               
                     <h3> Search here...</h3>
                     <input id = "searchfield" type="text" 
                            name="fname" 
                            placeholder= "Search for a place..."
                            onChange = {e => {
-                               filterVenues(e);
-                            // this.handleChange(e).bind(this)
+                            this.filterVenues(e);
                            }}
-                            // onChange = {this.handleChange.bind(this)}
-                           value = {query} 
-
+                           value = {this.state.query}
+                           aria-label="Input your search for Jewelry Stores in Bellevue, Washington"
+                           tabIndex='0'
                     >
                     </input>
                     <div className ="navlistnames">
                         <ol>
                             {
-                                listOfVenues.map ((venue, index) => {
-                                    {/* console.log(venuename.venue.name); */}
-                                    let name = venue.venue.name;
+                                this.state.searchVenues.map((venue, index) => {
+                                    console.log(venue);
+                                    let name = venue.name;
                                     {/* console.log(name); */}
                                     return(
                                         <li className="listitem" key= {index} 
                                         onClick = {(e) => {
-                                            handlelistitems(e,name,venue);
+                                            this.props.handlelistitems(e,name,venue);
                                         }}>
                                             <h4>{name}
                                             </h4>
-
                                         </li>
                                     )
                                 })

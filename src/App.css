@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  text-decoration-color: #f5f1f1;
+  text-decoration-color: #363333;
 }
 
 .App-logo {
@@ -12,7 +12,7 @@
   background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white;
+  color: rgb(37, 42, 44);
 }
 
 .App-title {
@@ -49,11 +49,13 @@ html,body {
 
 .NavBar{
   /* height: 30px; */
-  background: #02B7E9;
+  background: rgb(241, 245, 247);
   flex: 1;
   align-content: inherit;
   max-width: 100%;
   border: 1px #ccc solid;
+  font-size: 13px;
+
 
 
 }
@@ -64,7 +66,11 @@ html,body {
   max-width: 100%;
   height: 100hv;
   border: 1px #ccc solid;
-  background: #02B7E9;
+  background: rgb(241, 245, 247);
+  color: rgb(37, 42, 44);
+  font-size: 12px;
+
+
 }
 .listitem {
   cursor: pointer;
@@ -97,6 +103,7 @@ html,body {
 
 #navtitle{
  flex:85%;
+ color: rgb(41, 43, 44)
 }
 
 .navlistnames{
