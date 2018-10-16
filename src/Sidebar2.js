@@ -1,15 +1,7 @@
 import React from 'react';
 import './App.css';
-// Remember -----this.props.ListOfVenues = Venuesarray from App.js
-//               this.props.MarkersProp = for All markers form Appjs using getvenues method
-//               this.props.MarkerTitles = for all marker Titles
-//               this.props.HandleListItems = function from App.js
 
 class SideBar extends React.Component{
-    // handleChange = (e)=>{
-    //     const evalue = e.target.value;
-    //     this.props.filterVenues(evalue);
-    // }
     state = {
         query: '',
         searchVenues : []
@@ -18,7 +10,6 @@ class SideBar extends React.Component{
         this.setState({
             searchVenues: data.markersProp
         });
-        console.log(this.state);
     }
     filterVenues = (event) => {
         const {value} = event.target;
@@ -26,7 +17,6 @@ class SideBar extends React.Component{
         console.log(this.props.markersProp);
         this.props.markersProp.forEach(venue => {
             if(venue.name.toLowerCase().indexOf(value.toLowerCase()) >= 0){
-                // console.log(value);
                 venue.setVisible(true);
                 search.push(venue);
               } else {
@@ -40,7 +30,6 @@ class SideBar extends React.Component{
         }          
     render(){
         console.log(this.state.seachVenues);
-        // const {handlelistitems, listOfVenues, query, filterVenues} = this.props;
         return(
            <div>
                 <div>               
@@ -52,7 +41,7 @@ class SideBar extends React.Component{
                             this.filterVenues(e);
                            }}
                            value = {this.state.query}
-                           aria-label="Input your search for Jewelry Stores in Bellevue, Washington"
+                           aria-label="Search for Jewelry Stores in Bellevue,Washington. Input your Search"
                            tabIndex='0'
                     >
                     </input>
@@ -60,7 +49,6 @@ class SideBar extends React.Component{
                         <ol>
                             {
                                 this.state.searchVenues.map((venue, index) => {
-                                    console.log(venue);
                                     let name = venue.name;
                                     {/* console.log(name); */}
                                     return(
@@ -81,5 +69,4 @@ class SideBar extends React.Component{
         );
     }
 }
-
 export default SideBar;

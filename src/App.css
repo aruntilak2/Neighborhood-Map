@@ -41,14 +41,9 @@ html,body {
 .container, #navbargrid{
   display: flex;
 }
-/* 
-.container div{
- border: 1px #ccc solid;
-} */
 
 
 .NavBar{
-  /* height: 30px; */
   background: rgb(241, 245, 247);
   flex: 1;
   align-content: inherit;
@@ -109,16 +104,11 @@ html,body {
 .navlistnames{
   height: 80vh;
   width:100%;
-/*   
-  overflow: auto;
-  padding: 2px; */
   overflow-y: scroll;
-  /* scrollbar-width: thin; */
 
 }
 ::-webkit-scrollbar {
   width: 20px;
-  /* scrollbar-width: 1em; */
 
 }
 

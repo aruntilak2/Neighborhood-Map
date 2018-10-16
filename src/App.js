@@ -19,11 +19,12 @@ class App extends Component {
     this.getvenues()
   }
   // This function uses to load Google Script
+  // Getting the MAps
   loadMaps =() =>{
     loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCf3etmckSNxbM0d_htnZZGwKTpQP2TIQk&callback=initMap')
     window.initMap = this.initMap
   }
-
+  // Initialising the Maps
   initMap =() =>{
      const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {
@@ -104,7 +105,7 @@ class App extends Component {
       }
     });
   }
-  // Using Foursquare to get Dynamic data
+  // Using Foursquare to get Dynamic data of stores
   getvenues =() =>{
     const endpoint = "https://api.foursquare.com/v2/venues/explore?";
     const parameters = {
@@ -114,16 +115,13 @@ class App extends Component {
       near: "Bellevue",
       v:'20182507'
     }
-    //  My first timeUsing axios instead of fetch.
+    //  My first time using axios instead of fetch.
     axios.get(endpoint + new URLSearchParams(parameters))
       .then(response => {
-        // console.log(response.data.response.groups[0].items);
         this.setState({
           venues: response.data.response.groups[0].items
         }, this.loadMaps())
-        // export var venues;
-        console.log(this.state.venues);
-        // console.log(this.state.venues.venue.name)
+
       })
       .catch(error => {
         console.log('Error' + error);
@@ -134,19 +132,9 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.allMarkers);
     return (
         <div className="App"
-                    // tabIndex='1'
-                    // aria-label = "Jewelry Stores in Bellevue,Washington"
         >  
-        {/* <label
-            tabIndex='0'
-            aria-label = "Jewelry Stores in Bellevue,Washington"
-            role="Neightborhood Maps in Bellevue, Washington"
-            >
-          </label> */}
-      
         <NavBar 
         />
             <div className ='container'>
@@ -156,13 +144,17 @@ class App extends Component {
                 markersProp ={this.state.allMarkers}
                 markerTitles = {this.state.allMarkersTitles}
                 handlelistitems = {this.handlelistitems.bind(this)}
-                // filterVenues = {this.filterVenues.}
                 query = {this.state.query}
               /> 
               </div>
               <div className="mapplace">
-                  <div id="map">
-                                    </div>
+                  <div id="map"
+                      role="application"
+                      className="aria-label"
+                      aria-label="Google Map Area for the Stores"
+                      tabIndex='0'
+                  >
+                  </div>
               </div>
             </div>
         </div>
@@ -170,6 +162,7 @@ class App extends Component {
   }
 }
 
+// Loadind scripts asynchronously
 function loadScript(url) {
   var index = window.document.getElementsByTagName ('script')[0]
   var script = window.document.createElement('script')
@@ -179,6 +172,3 @@ function loadScript(url) {
   index.parentNode.insertBefore(script, index)
 }
 export default App;
-// export default GoogleApiWrapper({
-//   apiKey: ("AIzaSyCf3etmckSNxbM0d_htnZZGwKTpQP2TIQk")
-// })(App)
